@@ -13,7 +13,7 @@ const app = express();
 
 app.disable('x-powered-by');
 app.use(helmet());
-const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'http://localhost:5173')
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'truth-lens-ai-hhnl.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
