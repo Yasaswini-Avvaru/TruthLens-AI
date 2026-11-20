@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, FileSearch, ShieldCheck, Sparkles, ExternalLink, LoaderCircle, Mic, Pause, Play, Square, Volume2, Send } from 'lucide-react';
 import './evidence.css';
 
-const API_BASE = import.meta.env.DEV ? '' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000');
+const API_BASE = import.meta.env.DEV ? '' : (import.meta.env.VITE_API_BASE_URL || 'https://truthlens-ai-egl2.onrender.com');
 
 async function readApiJson(response, operation) {
   const responseText = await response.text();

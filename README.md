@@ -20,6 +20,16 @@ Run both applications with `npm run dev` from the repository root. The frontend 
 
 Run only the frontend with `npm run dev --workspace frontend`, or only the backend with `npm run dev --workspace backend`.
 
+## Deploy
+
+For the current Vercel and Render deployment, configure these environment variables in the service dashboards:
+
+- **Vercel** (`VITE_API_BASE_URL`): `https://truthlens-ai-egl2.onrender.com`
+- **Render** (`FRONTEND_ORIGIN`): `https://truth-lens-ai-hhnl.vercel.app`
+- **Render**: add `LLM_API_KEY`, `SEARCH_API_KEY`, and `MONGODB_URI`; set `LLM_API_URL` and `LLM_MODEL` to match the configured OpenAI-compatible provider. Keep provider credentials only in Render's environment settings, never in Vercel or frontend code.
+
+After changing Vercel variables, redeploy the frontend so Vite rebuilds with the API URL. After changing Render variables, restart or redeploy the backend. Check `https://truthlens-ai-egl2.onrender.com/api/health` before testing a claim.
+
 ## Environment variables
 
 Backend variables are documented in `backend/.env.example`: `PORT`, `MONGODB_URI`, `FRONTEND_ORIGIN`, `LLM_API_KEY`, `SEARCH_API_KEY`, `LLM_API_URL`, `LLM_MODEL`, `LANGUAGE_DETECTION_PROVIDER`, `MODEL_INPUT_LANGUAGES`, and `MODEL_RESPONSE_LANGUAGES`. Declare only languages supported by the configured model using comma-separated `tag:Name` entries; keep input and report-generation capabilities distinct. The service detects input language before evidence analysis, uses the dominant language by default, and accepts an optional response-language override. Unsupported input or response languages are reported instead of defaulting to English. Search uses Tavily; the LLM endpoint defaults to OpenAI-compatible Chat Completions. Keep all keys on the backend. If MongoDB is not connected, a completed report is temporary. The frontend uses `VITE_API_BASE_URL` from `frontend/.env.example`.
