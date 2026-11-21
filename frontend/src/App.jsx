@@ -291,7 +291,7 @@ export default function App() {
       const response = await fetch(`${API_BASE}/api/schemes/${audio ? 'ask-audio' : 'ask'}${audio ? `?responseLanguage=${encodeURIComponent(language)}` : ''}`, audio
         ? { method: 'POST', headers: { 'Content-Type': audio.type || 'audio/webm' }, body: audio }
         : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: askedQuestion, responseLanguage: language }) });
-      const data = await response.json();
+      const data = await readApiJson(response, 'Scheme assistant');
       if (!response.ok || !data.success) throw new Error(data.error || 'The scheme assistant could not answer this question.');
       setSchemeResult({ ...data.result, speechAvailable: data.speechAvailable });
       if (data.transcript) setSchemeQuestion(data.transcript);
